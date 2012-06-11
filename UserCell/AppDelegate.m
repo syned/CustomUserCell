@@ -26,16 +26,21 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     
-    
+    // create main table
     self.masterViewController = [[MasterViewController alloc] initWithNibName:@"MasterViewController" bundle:nil];
     
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        // split view controller
         self.splitViewController = [[UISplitViewController alloc] init];
+        // show information
         self.detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
         
+        // navigation bar at the top of the screen
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:self.detailViewController];
+        // wrap up controllers
         self.splitViewController.viewControllers = [NSArray arrayWithObjects:self.masterViewController, nav, nil];
         
+        // delegate you want to receive split view controller messages
         self.splitViewController.delegate = self.detailViewController;
         
         self.window.rootViewController = self.splitViewController;
